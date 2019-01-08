@@ -38,11 +38,10 @@
                             <!-- In this case, we're using RESTEasy -->
                             <language>jaxrs-resteasy</language>
 
-                            <configOptions>
-                                <!--The output folder for the generated code (see also <sourceFolder>) -->
-                                <!-- TODO: This doesn't seem to be working -->
-                                <output>${project.build.directory}/generated-sources/openapi</output>
+                            <!--The output folder for the generated code (see also <sourceFolder>) -->
+                            <output>${project.build.directory}/generated-sources/openapi</output>
 
+                            <configOptions>
                                 <!-- The source folder in which to store the generated code (see also <output>) -->
                                 <sourceFolder>src/generated/java/main</sourceFolder>
                             </configOptions>

@@ -11,6 +11,46 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- OpenAPI CodeGen Version -->
+        <openApi.codeGen.version>3.0.0-rc1</openApi.codeGen.version>
     </properties>
+
+    <build>
+        <plugins>
+            <!-- The plugin responsible for the server stub generation based on the OpenAPI specification document -->
+            <plugin>
+                <!-- TODO: This may be moving or already moved to a different groupId/artifactId. Investigation needed -->
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <version>${openApi.codeGen.version}</version>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <!-- The location where the OpenAPI specification document can be found -->
+                            <inputSpec>${project.basedir}/src/main/resources/openapi.yaml</inputSpec>
+
+                            <!-- The language to use for the server stub generation -->
+                            <!-- In this case, we're using RESTEasy -->
+                            <language>jaxrs-resteasy</language>
+
+                            <configOptions>
+                                <!--The output folder for the generated code (see also <sourceFolder>) -->
+                                <!-- TODO: This doesn't seem to be working -->
+                                <output>${project.build.directory}/generated-sources/openapi</output>
+
+                                <!-- The source folder in which to store the generated code (see also <output>) -->
+                                <sourceFolder>src/generated/java/main</sourceFolder>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -1,0 +1,49 @@
+openapi: 3.0.0
+
+info:
+  title: OpenAPI CodeGen Example with RESTEasy
+  version: 1.0.0
+  description: |
+    An example of how you can generate server stubs from an OpenAPI specification document.
+    Provided below are some simple APIs to give a through example of how different implementations work.
+    In your own project, you should create this file based on the APIs you need.
+    If you need information on defining the specification, see the [official documentation](https://swagger.io/docs/specification/about/) and/or the [GitHub documentation](https://github.com/OAI/OpenAPI-Specification/blob/OpenAPI.next/versions/3.0.0.md#info-object).
+
+paths:
+  /greeting:
+    get:
+      summary: Retrieves a simple greeting.
+      description: |
+        Retrieves a simple greeting from the server. No paramaeters are required.
+      operationId: getGreeting # The codegen plugin will use this as the API method name
+      responses:
+        "200":
+          description: Successfully retrieved a greeting.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: A simple greeting.
+  /greeting/{displayName}:
+    get:
+      summary: Retrieves a greeting with the user's chosen display name.
+      description: |
+        Retrieves a simple greeting from the server which encorporates the user's chosen display name.
+        This name is known via the path parameter `displayName`.
+      operationId: getGreetingWithDisplayName # The codegen plugin will use this as the API method name
+      parameters:
+        - name: displayName
+          in: path
+          required: true
+          description: The name to be used for the greeting.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved a greeting.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: A simple greeting for John.
+

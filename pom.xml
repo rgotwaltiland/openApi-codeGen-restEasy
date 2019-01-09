@@ -54,7 +54,8 @@
 
                             <configOptions>
                                 <!-- The source folder in which to store the generated code (see also <output>) -->
-                                <sourceFolder>src/generated/java/main</sourceFolder>
+                                <!-- TODO: Investigate - Changing this may affect the subproject's ability to build -->
+                                <sourceFolder>src/main/java</sourceFolder>
                             </configOptions>
                         </configuration>
                     </execution>

@@ -24,7 +24,7 @@ It is recommended that you provide an `operationId` as failing to provide one le
 Examples of specifying the `operationId` are given in `src/main/resources/openapi.yaml`.
 You can see the resulting methods in the `GreetingApiService` in the code generation folder.
 
-#### Known Dependencies Issue
+#### Known Issues
 
 There is a [known issue](https://github.com/swagger-api/swagger-codegen/issues/5410) with the OpenAPI codegen maven plugin.
 The plugin generates the code as if it were an independent or new project and creates a separate POM with the generated code (in our case, at `target/generated-sources/openapi/pom.xml`).
@@ -32,3 +32,7 @@ As a result, upon building the project, the dependencies in the separate POM are
 Until this issue is resolved, the workaround is to copy the `<dependencies>` and `<properties>` from the generated POM into the main project POM.
 This should only be necessary when the version of the plugin is updated.
 Comments in the main project POM indicate where dependencies and properties have been copied over (and therefore where they need to be updated should the plugin version ever be updated).
+
+In addition, the code generation does not seem to correctly configure jetty for the generated project (trying to follow the directions in `target/generated-soruces/openapi/README.md` errors).
+The workaround to this is to add the jetty plugin directly to the main project POM and copy over the `web.xml` from the generated project (`target/generated-sources/openapi/src/main/webapp/WEB-INF/web.xml`) to the main project.
+Like above, this copying will need to be repeated should the plugin version be updated and inline comments have been added to `web.xml` to indicate the copied block.
